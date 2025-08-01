@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: chapchap-backend
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRES_IN
+        value: 7d
+      - key: APP_NAME
+        value: Chapchap
+      - key: APP_VERSION
+        value: 1.0.0
+      - key: CLIENT_URL
+        value: https://your-frontend-url.onrender.com
+    # Variables de base de données PostgreSQL (à configurer dans le dashboard Render)
+    # DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD seront ajoutées via l'interface
+
+  # Service de base de données PostgreSQL (optionnel si vous utilisez une DB externe)
+  - type: pserv
+    name: chapchap-postgres
+    plan: free
+    env: postgres
+    # Cette base de données sera automatiquement liée au service web
